@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.5.5/css/simple-line-icons.min.css" integrity="sha512-QKC1UZ/ZHNgFzVKSAhV5v5j73eeL9EEN289eKAEFaAjgAiobVAnVv/AGuPbXsKl1dNoel3kNr6PYnSiTzVVBCw==" crossorigin="anonymous" />
+  <link rel="stylesheet" href="./style.css">
+  <title>Calendar</title>
+</head>
+<body>
+  <div class="page">
+    <div class="calendar">
+      <section class="calendar__top-block">
+        <div id="top-block" class="calendar__top-block-wrapper">
+          <h1 class="calendar__top-block-title">The Calendar</h1>
+          <div class="calendar__top-block-day-description"></div>
+        </div>
+      </section>
+
+      <main class="calendar__main-content">
+        <div class="calendar__active-month">
+          <div class="calendar__active-month-nav">
+            <div class="icon-arrow-up calendar__btn"></div>
+            <div class="icon-arrow-down calendar__btn"></div>
+          </div>
+        </div>
+
+        <section class="calendar__week-days">
+          <div class="calendar__week-wrapper">
+            <ul class="calendar__week-list"></ul>
+          </div>
+        </section>
+
+        <ul class="calendar__days-list"></ul>
+        <div class="calendar__main-content-bottom-line"></div>
+      </main>
+
+      <section class="calendar__events">
+        <div class="calendar__events-list"></div>
+        <div class="icon-settings calendar__events-settings calendar__btn"></div>
+      </section>
+    </div>
+
+    <!-- <div class="calendar-frame">
+      <div class="calendar-frame__layer">
+        <div class="calendar-frame__calendar">
+          <section class="calendar__top-block">
+            <div id="top-block" class="page__wrapper">
+              <h1 class="calendar__top-block-title">The Calendar</h1>
+            </div>
+          </section>
+    
+          <main class="calendar__main-content">
+            <div class="calendar__active-month">
+              <div class="calendar__active-month-nav">
+                <div class="icon-arrow-up calendar__btn" onclick="nextMonth(event)"></div>
+                <div class="icon-arrow-down calendar__btn" onclick="prevMonth()"></div>
+              </div>
+            </div>
+    
+            <section class="calendar__week-days">
+              <div class="calendar__week-wrapper">
+                <ul class="calendar__week-list"></ul>
+              </div>
+            </section>
+    
+            <ul class="calendar__days-list"></ul>
+            <div class="calendar__main-content-bottom-line"></div>
+          </main>
+    
+          <section class="calendar__events">
+            <div class="calendar__events-list"></div>
+            <div class="icon-settings calendar__events-settings calendar__btn"></div>
+          </section>
+        </div>
+
+        <div class="calendar-frame__todo"></div>
+      </div>
+    </div> -->
+
+    <!-- SETTINGS -->
+    <section class="calendar-settings">
+      <div class="calendar-settings__left-block">
+        <ul class="calendar-settings__properties-list">
+          <li id="Beginning-of-the-week" class="calendar-settings__properties-item calendar-settings__properties-item_active">
+            <div class="icon-directions calendar-settings__properties-item-icon"></div>
+            <span class="calendar-settings__properties-item-text">Beginning of the week</span>
+          </li>
+          <li id="Set-days-off" class="calendar-settings__properties-item">
+            <div class="icon-home calendar-settings__properties-item-icon"></div>
+            <span class="calendar-settings__properties-item-text">Weekend</span>
+          </li>
+          <li id="Previous/next-month" class="calendar-settings__properties-item">
+            <div class="icon-calculator calendar-settings__properties-item-icon"></div>
+            <span class="calendar-settings__properties-item-text">Previous/next month</span>
+          </li>
+          <li id="Previous/next-month" class="calendar-settings__properties-item">
+            <div class="icon-notebook calendar-settings__properties-item-icon"></div>
+            <span class="calendar-settings__properties-item-text">Scheduler</span>
+          </li>
+        </ul>
+      </div>
+      
+      <div class="calendar-settings__right-block">
+        <div class="calendar-settings__customization calendar-settings__customization_active">
+          <section class="setting-card">
+            <h2 class="setting-card__title">The first day of week</h2>
+            <div class="setting-card__content">
+              <input class="setting-card__content-radio calendar-settings__weekend" type="radio" id="monday" name="first-day" value="Monday">
+              <label class="setting-card__content-label" for="monday">Monday</label>
+              
+              <input class="setting-card__content-radio calendar-settings__weekend" type="radio" id="sunday" name="first-day" value="Sunday">
+              <label class="setting-card__content-label" for="sunday">Sunday</label>
+            </div>
+          </section>
+        </div>
+
+        <div class="calendar-settings__customization">
+          <section class="setting-card">
+            <h2 class="setting-card__title">Set days off</h2>
+            <div class="setting-card__content">
+              <input class="setting-card__content-radio calendar-settings__day-for-weekend" type="checkbox" id="mo" name="weekend-set" value="monday">
+              <label class="setting-card__content-label" for="mo">Monday</label>
+
+              <input class="setting-card__content-radio calendar-settings__day-for-weekend" type="checkbox" id="tu" name="weekend-set" value="tuesday">
+              <label class="setting-card__content-label" for="tu">Tuesday</label>
+
+              <input class="setting-card__content-radio calendar-settings__day-for-weekend" type="checkbox" id="we" name="weekend-set" value="wednesday">
+              <label class="setting-card__content-label" for="we">Wednesday</label>
+
+              <input class="setting-card__content-radio calendar-settings__day-for-weekend" type="checkbox" id="th" name="weekend-set" value="thursday">
+              <label class="setting-card__content-label" for="th">Thursday</label>
+
+              <input class="setting-card__content-radio calendar-settings__day-for-weekend" type="checkbox" id="fr" name="weekend-set" value="friday">
+              <label class="setting-card__content-label" for="fr">Friday</label>
+
+              <input class="setting-card__content-radio calendar-settings__day-for-weekend" type="checkbox" id="sa" name="weekend-set" value="saturday">
+              <label class="setting-card__content-label" for="sa">Saturday</label>
+              
+              <input class="setting-card__content-radio calendar-settings__day-for-weekend" type="checkbox" id="su" name="weekend-set" value="sunday">
+              <label class="setting-card__content-label" for="su">Sunday</label>
+            </div>
+          </section>
+
+          <button class="calendar-btn calendar-settings__customization-btn calendar-settings__set-weekend-btn" type="button">Set</button>
+        </div>
+
+        <div class="calendar-settings__customization">
+          <section class="setting-card">
+            <h2 class="setting-card__title">Show next/prev month</h2>
+            <div class="setting-card__content">
+              <input class="setting-card__content-radio calendar-settings__show-only-current-month" type="checkbox" id="show-current-month" value="next/prev-month">
+              <label class="setting-card__content-label" for="show-current-month">Show only current month</label>
+            </div>
+          </section>
+        </div>
+
+        <div class="calendar-settings__customization">
+          <section class="setting-card">
+            <h2 class="setting-card__title">Todo list setting</h2>
+            <div class="setting-card__content">
+              <input class="setting-card__content-radio calendar-settings__off-on-scheduler" type="checkbox" id="on-off-scheduler" value="next/prev-month" checked>
+              <label class="setting-card__content-label" for="on-off-scheduler">Scheduler is active</label>
+            </div>
+          </section>
+        </div>
+
+        <div class="icon-close calendar__btn calendar__close-btn calendar-settings__close-btn"></div>
+      </div>
+    </section>
+
+    <!-- SCHEDULER -->
+    <section class="calendar-scheduler">
+      <div class="calendar-scheduler__content">
+        <div class="calendar-scheduler__img"></div>
+        <div class="calendar-scheduler__todo-list">
+          <div class="calendar-scheduler__add-todo-item">
+            <input class="calendar-scheduler__add-todo-input" type="text" placeholder="Add your new todo">
+            <div class="icon-plus calendar__btn calendar__add-btn"></div>
+          </div>
+          <ul class="calendar-scheduler__todo-list-items"></ul>
+        </div>
+        <div class="icon-close calendar__btn calendar__close-btn calendar-scheduler__close-btn"></div>
+      </div>
+    </section>
+  </div>
+  
+  <script src="./index.js"></script>
+</body>
+</html>
